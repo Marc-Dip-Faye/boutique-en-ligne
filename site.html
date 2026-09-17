@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ApexStore — Le Meilleur de la Technologie à Dakar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<!-- ══════════ BARRE D'ANNONCE ══════════ -->
+<div class="announcement-bar">
+  <div class="ann-track">
+    <div class="ann-group">
+      <span><i class="fa-solid fa-bolt"></i> Ventes Flash d'Été : jusqu'à -20% avec le code <b class="code">SUMMER2026</b></span>
+      <span><i class="fa-solid fa-truck-fast"></i> Livraison gratuite dès 100 000 FCFA</span>
+      <span><i class="fa-solid fa-rotate-left"></i> Retours gratuits sous 7 jours</span>
+      <span><i class="fa-solid fa-shield-halved"></i> Paiement 100% sécurisé (Wave, Orange Money, Visa)</span>
+    </div>
+    <div class="ann-group" aria-hidden="true">
+      <span><i class="fa-solid fa-bolt"></i> Ventes Flash d'Été : jusqu'à -20% avec le code <b class="code">SUMMER2026</b></span>
+      <span><i class="fa-solid fa-truck-fast"></i> Livraison gratuite dès 100 000 FCFA</span>
+      <span><i class="fa-solid fa-rotate-left"></i> Retours gratuits sous 7 jours</span>
+      <span><i class="fa-solid fa-shield-halved"></i> Paiement 100% sécurisé (Wave, Orange Money, Visa)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="header" id="header">
+  <div class="header-main">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+
+    <a href="#" class="logo">
+      <span class="logo-icon"><i class="fa-solid fa-bag-shopping"></i></span>
+      <span class="logo-text">ApexStore</span>
+      <span class="logo-badge">PRO</span>
+    </a>
+
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque… (ex : iPhone, parfum, climatiseur)">
+      <button aria-label="Rechercher"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <div class="header-actions">
+      <button class="header-btn" id="wishlistBtn" aria-label="Favoris">
+        <i class="fa-regular fa-heart"></i><span class="badge" id="wishlistCount">0</span>
+      </button>
+      <button class="header-btn" id="cartBtn" aria-label="Panier">
+        <i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartCount">0</span>
+      </button>
+      <button class="btn-account">
+        <span class="avatar"><i class="fa-solid fa-user"></i></span>
+        <span class="info"><span class="name">Mon Compte</span><span class="sub">Se connecter</span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="nav-bar" id="navBar">
+    <div class="nav-container">
+      <a href="#boutique" class="nav-link active" data-cat="all"><i class="fa-solid fa-border-all"></i> Tout</a>
+      <a href="#boutique" class="nav-link" data-cat="electronique"><i class="fa-solid fa-mobile-screen"></i> Électronique & High-Tech</a>
+      <a href="#boutique" class="nav-link" data-cat="maison"><i class="fa-solid fa-blender"></i> Électroménager & Maison</a>
+      <a href="#boutique" class="nav-link" data-cat="mode"><i class="fa-solid fa-gem"></i> Mode & Accessoires</a>
+      <a href="#boutique" class="nav-link" data-cat="beaute"><i class="fa-solid fa-spray-can-sparkles"></i> Beauté & Soins</a>
+      <a href="#boutique" class="nav-link" data-cat="sport"><i class="fa-solid fa-dumbbell"></i> Sports & Loisirs</a>
+      <a href="#flash" class="nav-link hot"><i class="fa-solid fa-bolt"></i> Ventes Flash</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero-section">
+  <div class="hero-main reveal">
+    <img src="images site/1787773603(1).png" alt="Univers high-tech ApexStore">
+    <div class="hero-overlay">
+      <span class="hero-tag"><span class="dot"></span> Collection 2026 disponible</span>
+      <h1 class="hero-title">Le Meilleur de la<br>Technologie à Dakar</h1>
+      <p class="hero-subtitle">Livraison Express en 24h à Dakar, Thiès et Saint-Louis.</p>
+      <div class="hero-buttons">
+        <a href="#boutique" class="btn-primary">Découvrir la boutique <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#flash" class="btn-ghost"><i class="fa-solid fa-bolt"></i> Ventes Flash</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-side">
+    <div class="hero-card reveal">
+      <img src="images site/1787773619.png" alt="Soldes d'été">
+      <div class="hero-card-overlay">
+        <h3>Soldes d'Été ☀️</h3>
+        <p>Jusqu'à -20% avec le code SUMMER2026</p>
+      </div>
+    </div>
+    <div class="hero-card reveal">
+      <img src="images site/1787773614.png" alt="Mode & accessoires">
+      <div class="hero-card-overlay">
+        <h3>Mode & Accessoires</h3>
+        <p>Le chic artisanal de Dakar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MARQUEE MARQUES ══════════ -->
+<div class="brands-marquee">
+  <div class="brands-track">
+    <span>Apple</span><span>Samsung</span><span>LG</span><span>Sony</span><span>DeLonghi</span><span>Dakar Leather Co.</span><span>Nike Fitness</span><span>Dior</span>
+    <span>Apple</span><span>Samsung</span><span>LG</span><span>Sony</span><span>DeLonghi</span><span>Dakar Leather Co.</span><span>Nike Fitness</span><span>Dior</span>
+  </div>
+</div>
+
+<!-- ══════════ AVANTAGES ══════════ -->
+<section class="features-bar">
+  <div class="feature-item reveal"><span class="feature-icon purple"><i class="fa-solid fa-truck-fast"></i></span><div><h4>Livraison Express 24h</h4><p>Dakar, Thiès, Saint-Louis</p></div></div>
+  <div class="feature-item reveal"><span class="feature-icon green"><i class="fa-solid fa-hand-holding-dollar"></i></span><div><h4>Paiement à la livraison</h4><p>Wave, Orange Money, espèces</p></div></div>
+  <div class="feature-item reveal"><span class="feature-icon gold"><i class="fa-solid fa-shield-halved"></i></span><div><h4>Garantie officielle</h4><p>Produits 100% authentiques</p></div></div>
+  <div class="feature-item reveal"><span class="feature-icon pink"><i class="fa-solid fa-headset"></i></span><div><h4>Support 7j/7</h4><p>WhatsApp & téléphone</p></div></div>
+</section>
+
+<!-- ══════════ VENTES FLASH ══════════ -->
+<section class="flash-sale" id="flash">
+  <div class="flash-header">
+    <div class="flash-title">
+      <h2><i class="fa-solid fa-bolt"></i> Ventes Flash</h2>
+      <span class="live-badge">EN DIRECT</span>
+    </div>
+    <div class="countdown">
+      <span class="countdown-label">Se termine dans :</span>
+      <div class="countdown-item"><span class="num" id="cdH">00</span><span class="label">Heures</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-item"><span class="num" id="cdM">00</span><span class="label">Min</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-item"><span class="num" id="cdS">00</span><span class="label">Sec</span></div>
+    </div>
+    <a href="#boutique" class="link-more">Tout voir <i class="fa-solid fa-chevron-right"></i></a>
+  </div>
+  <div class="flash-grid" id="flashGrid"></div>
+</section>
+
+<!-- ══════════ CATÉGORIES ══════════ -->
+<section class="categories-section">
+  <div class="section-header reveal">
+    <h2>Explorez nos Univers</h2>
+    <p>Cinq univers soigneusement sélectionnés pour vous.</p>
+  </div>
+  <div class="categories-grid">
+    <div class="category-card big reveal" data-cat="electronique">
+      <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=1200&q=85" alt="Électronique">
+      <div class="cat-overlay"><h3>Électronique & High-Tech</h3><span class="cat-count">5 produits</span><span class="cat-cta">Explorer <i class="fa-solid fa-arrow-right"></i></span></div>
+    </div>
+    <div class="category-card reveal" data-cat="maison">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85" alt="Maison">
+      <div class="cat-overlay"><h3>Électroménager & Maison</h3><span class="cat-count">2 produits</span><span class="cat-cta">Explorer <i class="fa-solid fa-arrow-right"></i></span></div>
+    </div>
+    <div class="category-card reveal" data-cat="mode">
+      <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85" alt="Mode">
+      <div class="cat-overlay"><h3>Mode & Accessoires</h3><span class="cat-count">2 produits</span><span class="cat-cta">Explorer <i class="fa-solid fa-arrow-right"></i></span></div>
+    </div>
+    <div class="category-card reveal" data-cat="beaute">
+      <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=85" alt="Beauté">
+      <div class="cat-overlay"><h3>Beauté & Soins</h3><span class="cat-count">1 produit</span><span class="cat-cta">Explorer <i class="fa-solid fa-arrow-right"></i></span></div>
+    </div>
+    <div class="category-card reveal" data-cat="sport">
+      <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=85" alt="Sport">
+      <div class="cat-overlay"><h3>Sports & Loisirs</h3><span class="cat-count">1 produit</span><span class="cat-cta">Explorer <i class="fa-solid fa-arrow-right"></i></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ BOUTIQUE / MEILLEURES VENTES ══════════ -->
+<section class="products-section" id="boutique">
+  <div class="section-header reveal">
+    <h2>Meilleures Ventes & Vedettes</h2>
+    <p>Les produits préférés de nos clients, mis à jour en temps réel.</p>
+  </div>
+  <div class="filter-tabs" id="filterTabs">
+    <button class="filter-tab active" data-cat="all">Tous</button>
+    <button class="filter-tab" data-cat="electronique">High-Tech</button>
+    <button class="filter-tab" data-cat="maison">Maison</button>
+    <button class="filter-tab" data-cat="mode">Mode</button>
+    <button class="filter-tab" data-cat="beaute">Beauté</button>
+    <button class="filter-tab" data-cat="sport">Sport</button>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- ══════════ BANNIÈRES PROMO ══════════ -->
+<section class="promo-banners">
+  <div class="promo-banner reveal">
+    <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1400&q=85" alt="Soldes d'été">
+    <div class="promo-content">
+      <h3>L'été sera chaud 🔥</h3>
+      <p>-20% + livraison offerte avec le code SUMMER2026</p>
+      <button class="btn-primary" data-promo="summer">J'en profite</button>
+    </div>
+  </div>
+  <div class="promo-banner reveal">
+    <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=1400&q=85" alt="Ventes flash">
+    <div class="promo-content">
+      <h3>Dernières heures ⏳</h3>
+      <p>Des remises exceptionnelles avant la rupture de stock</p>
+      <a href="#flash" class="btn-primary">Voir les deals</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ NEWSLETTER ══════════ -->
+<section class="newsletter">
+  <div class="newsletter-card reveal">
+    <div class="newsletter-text">
+      <h2>Rejoignez le Club Apex 💎</h2>
+      <p>-10% sur votre première commande + accès anticipé aux ventes privées.</p>
+    </div>
+    <form id="newsletterForm" class="newsletter-form">
+      <input type="email" required placeholder="Votre adresse email…">
+      <button type="submit" class="btn-primary">S'abonner</button>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <a href="#" class="logo footer-logo">
+        <span class="logo-icon"><i class="fa-solid fa-bag-shopping"></i></span>
+        <span class="logo-text light">ApexStore</span>
+      </a>
+      <p>Votre destination shopping premium à Dakar. Technologie, maison, mode, beauté et sport — livrés en 24h partout au Sénégal.</p>
+      <div class="socials">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Catégories</h4>
+      <a href="#boutique">Électronique & High-Tech</a>
+      <a href="#boutique">Électroménager & Maison</a>
+      <a href="#boutique">Mode & Accessoires</a>
+      <a href="#boutique">Beauté & Soins</a>
+      <a href="#boutique">Sports & Loisirs</a>
+    </div>
+    <div class="footer-col">
+      <h4>Informations</h4>
+      <a href="#">Livraison & retours</a>
+      <a href="#">Conditions générales</a>
+      <a href="#">Politique de confidentialité</a>
+      <a href="#">Suivre ma commande</a>
+      <a href="#">Devenir vendeur</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p><i class="fa-solid fa-location-dot"></i> Almadies, Route de Ngor — Dakar</p>
+      <p><i class="fa-solid fa-phone"></i> +221 77 000 00 00</p>
+      <p><i class="fa-solid fa-envelope"></i> contact@apexstore.sn</p>
+      <div class="payments">
+        <span>Wave</span><span>Orange Money</span><span>Free Money</span><span>Visa</span><span>Mastercard</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© <span id="year">2026</span> ApexStore — Tous droits réservés. Fait avec <i class="fa-solid fa-heart"></i> à Dakar.</p>
+  </div>
+</footer>
+
+<!-- ══════════ PANIER (DRAWER) ══════════ -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <header class="cart-header">
+    <h3><i class="fa-solid fa-cart-shopping"></i> Mon Panier <span class="drawer-count" id="drawerCount">(0)</span></h3>
+    <button id="closeCart" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+  </header>
+  <div class="free-shipping">
+    <p id="freeShipMsg"></p>
+    <div class="progress"><div id="freeShipProgress"></div></div>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <footer class="cart-footer">
+    <div class="cart-total"><span>Total estimé</span><strong id="cartTotal">0 FCFA</strong></div>
+    <button class="btn-primary btn-block" id="checkoutBtn">Commander maintenant <i class="fa-solid fa-arrow-right"></i></button>
+  </footer>
+</aside>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

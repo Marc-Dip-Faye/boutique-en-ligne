@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-slate-900 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexStore Back-Office | E-Commerce SaaS Platform</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Tailwind CSS CDN for the utility classes used by the interface -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Application CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="h-full bg-slate-950 font-sans text-slate-200 antialiased selection:bg-indigo-500 selection:text-white flex flex-col md:flex-row overflow-hidden">
+
+  <!-- Mobile Overlay Back-drop -->
+  <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300"></div>
+
+  <!-- App Layout Container -->
+  <div class="flex h-screen w-screen overflow-hidden">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-50 w-64 bg-slate-900 border-r border-slate-800/80 flex flex-col transition-transform duration-300 transform -translate-x-full md:translate-x-0 shrink-0">
+      
+      <!-- Brand Header -->
+      <div class="h-16 flex items-center justify-between px-5 border-b border-slate-800/80">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-emerald-400 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 font-bold text-xl">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1 class="font-bold text-base text-white tracking-tight flex items-center gap-1.5">
+              ApexStore <span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-400 font-semibold border border-indigo-500/20">Pro</span>
+            </h1>
+            <p class="text-xs text-slate-400">Back-Office E-Commerce</p>
+          </div>
+        </div>
+        <button id="close-sidebar-btn" class="md:hidden text-slate-400 hover:text-white p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="flex-1 overflow-y-auto px-3 py-4 space-y-6 custom-scrollbar">
+        
+        <!-- Main Navigation Group -->
+        <div>
+          <div class="px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">Général</div>
+          <nav class="space-y-1">
+            <a href="#dashboard" data-section="dashboard" class="nav-item active flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
+              <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3"></i>
+              <span>Tableau de bord</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Catalog & Inventory -->
+        <div>
+          <div class="px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">Catalogue</div>
+          <nav class="space-y-1">
+            <a href="#products" data-section="products" class="nav-item flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
+              <div class="flex items-center">
+                <i data-lucide="package" class="w-5 h-5 mr-3"></i>
+                <span>Produits</span>
+              </div>
+              <span id="badge-products-count" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">0</span>
+            </a>
+            <a href="#categories" data-section="categories" class="nav-item flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
+              <i data-lucide="folder-tree" class="w-5 h-5 mr-3"></i>
+              <span>Catégories</span>
+            </a>
+            <a href="#stock" data-section="stock" class="nav-item flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
+              <div class="flex items-center">
+                <i data-lucide="boxes" class="w-5 h-5 mr-3"></i>
+                <span>Gestion Stock</span>
+              </div>
+              <span id="badge-low-stock" class="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 font-semibold border border-amber-500/20">0</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Sales & CRM -->
+        <div>
+          <div class="px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">Ventes & Clients</div>
+          <nav class="space-y-1">
+            <a href="#orders" data-section="orders" class="nav-item flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
+              <div class="flex items-center">
+                <i data-lucide="shopping-cart" class="w-5 h-5 mr-3"></i>
+                <span>Commandes</span>
+              </div>
+              <span id="badge-orders-pending" class="text-xs px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-semibold">0</span>
+            </a>
+            <a href="#customers" data-section="customers" class="nav-item flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
+              <i data-lucide="users" class="w-5 h-5 mr-3"></i>
+              <span>Clients</span>
+            </a>
+            <a href="#promotions" data-section="promotions" class="nav-item flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
+              <i data-lucide="ticket" class="w-5 h-5 mr-3"></i>
+              <span>Promotions</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Store & Business Intelligence -->
+        <div>
+          <div class="px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">Boutique & Pilotage</div>
+          <nav class="space-y-1">
+            <a href="#content" data-section="content" class="nav-item flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
+              <i data-lucide="layout-template" class="w-5 h-5 mr-3"></i>
+              <span>Contenu Boutique</span>
+            </a>
+            <a href="#analytics" data-section="analytics" class="nav-item flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
+              <i data-lucide="trending-up" class="w-5 h-5 mr-3"></i>
+              <span>Analyses & Stats</span>
+            </a>
+            <a href="#settings" data-section="settings" class="nav-item flex items-center px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
+              <i data-lucide="settings" class="w-5 h-5 mr-3"></i>
+              <span>Paramètres</span>
+            </a>
+          </nav>
+        </div>
+
+      </div>
+
+      <!-- Footer / Store Live Status Indicator -->
+      <div class="p-4 border-t border-slate-800/80 bg-slate-900/50">
+        <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            <div>
+              <p class="text-xs font-semibold text-slate-200">Boutique En Ligne</p>
+              <p class="text-[10px] text-slate-400">Devise: <span class="text-emerald-400 font-mono font-bold">FCFA</span></p>
+            </div>
+          </div>
+          <a href="site.html" target="_blank" rel="noopener noreferrer" title="Aperçu site public" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors">
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden bg-slate-950 min-w-0">
+      
+      <!-- TOPBAR -->
+      <header class="h-16 border-b border-slate-800/80 bg-slate-900/80 backdrop-blur-md px-4 md:px-6 flex items-center justify-between z-30 shrink-0">
+        
+        <!-- Left: Toggle & Global Search -->
+        <div class="flex items-center space-x-3 flex-1 max-w-xl">
+          <button id="open-sidebar-btn" class="md:hidden text-slate-400 hover:text-white p-2 rounded-xl bg-slate-800/60 border border-slate-700/50">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+          
+          <div class="relative w-full">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+              <i data-lucide="search" class="w-4 h-4"></i>
+            </div>
+            <input type="text" id="global-search-input" placeholder="Rechercher un produit, commande, client, référence..." class="w-full pl-9 pr-12 py-2 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500/80 focus:ring-1 focus:ring-indigo-500/80 transition-all">
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+              <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-slate-400 bg-slate-800 rounded border border-slate-700">Ctrl K</kbd>
+            </div>
+
+            <!-- Search Dropdown Results -->
+            <div id="global-search-dropdown" class="absolute left-0 right-0 top-full mt-2 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl overflow-hidden hidden z-50 max-h-96 overflow-y-auto">
+              <div id="global-search-results" class="p-2 divide-y divide-slate-800/50">
+                <!-- Dynamic results inserted here -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Actions & Admin Profile -->
+        <div class="flex items-center space-x-3 ml-4">
+          
+          <!-- View Live Store Link -->
+          <a href="site.html" target="_blank" rel="noopener noreferrer" class="hidden lg:flex items-center space-x-2 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 rounded-xl transition-all">
+            <i data-lucide="store" class="w-4 h-4 text-emerald-400"></i>
+            <span>Voir la boutique</span>
+          </a>
+
+          <!-- Notification Bell -->
+          <div class="relative">
+            <button id="notif-toggle-btn" class="p-2 text-slate-400 hover:text-white rounded-xl bg-slate-800/40 border border-slate-800 hover:bg-slate-800 relative transition-all">
+              <i data-lucide="bell" class="w-5 h-5"></i>
+              <span id="notif-ping" class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+            </button>
+
+            <!-- Notification Drawer Dropdown -->
+            <div id="notif-dropdown" class="absolute right-0 mt-2 w-80 sm:w-96 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl hidden z-50 overflow-hidden">
+              <div class="p-4 border-b border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <h3 class="font-bold text-sm text-white">Notifications</h3>
+                  <span id="notif-count-badge" class="px-2 py-0.5 text-xs font-semibold rounded-full bg-indigo-500/20 text-indigo-300">3 nouvelles</span>
+                </div>
+                <button id="mark-notifs-read" class="text-xs text-indigo-400 hover:underline">Tout marquer comme lu</button>
+              </div>
+              <div id="notif-list" class="max-h-80 overflow-y-auto divide-y divide-slate-800/60">
+                <!-- Notifications loaded here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="h-6 w-px bg-slate-800"></div>
+
+          <!-- Admin User Profile -->
+          <div class="relative">
+            <button id="user-menu-btn" class="flex items-center space-x-3 p-1 rounded-xl hover:bg-slate-800/60 transition-all">
+              <img class="w-9 h-9 rounded-xl object-cover ring-2 ring-indigo-500/30" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" alt="Admin Avatar">
+              <div class="hidden sm:block text-left">
+                <p class="text-xs font-bold text-white leading-snug">Aminata Diallo</p>
+                <p class="text-[10px] text-slate-400 leading-none">Administrateur Principal</p>
+              </div>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 hidden sm:block"></i>
+            </button>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- VIEW PANELS CONTAINER -->
+      <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 custom-scrollbar relative">
+        
+        <!-- SECTION 1: DASHBOARD -->
+        <section id="sec-dashboard" class="view-section space-y-6">
+          <!-- Dynamic Content generated via JS -->
+        </section>
+
+        <!-- SECTION 2: PRODUCTS -->
+        <section id="sec-products" class="view-section hidden space-y-6">
+          <!-- Dynamic Content generated via JS -->
+        </section>
+
+        <!-- SECTION 3: CATEGORIES -->
+        <section id="sec-categories" class="view-section hidden space-y-6">
+          <!-- Dynamic Content generated via JS -->
+        </section>
+
+        <!-- SECTION 4: STOCK -->
+        <section id="sec-stock" class="view-section hidden space-y-6">
+          <!-- Dynamic Content generated via JS -->
+        </section>
+
+        <!-- SECTION 5: ORDERS -->
+        <section id="sec-orders" class="view-section hidden space-y-6">
+          <!-- Dynamic Content generated via JS -->
+        </section>
+
+        <!-- SECTION 6: CUSTOMERS -->
+        <section id="sec-customers" class="view-section hidden space-y-6">
+          <!-- Dynamic Content generated via JS -->
+        </section>
+
+        <!-- SECTION 7: PROMOTIONS -->
+        <section id="sec-promotions" class="view-section hidden space-y-6">
+          <!-- Dynamic Content generated via JS -->
+        </section>
+
+        <!-- SECTION 8: STORE CONTENT -->
+        <section id="sec-content" class="view-section hidden space-y-6">
+          <!-- Dynamic Content generated via JS -->
+        </section>
+
+        <!-- SECTION 9: ANALYTICS -->
+        <section id="sec-analytics" class="view-section hidden space-y-6">
+          <!-- Dynamic Content generated via JS -->
+        </section>
+
+        <!-- SECTION 10: SETTINGS -->
+        <section id="sec-settings" class="view-section hidden space-y-6">
+          <!-- Dynamic Content generated via JS -->
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- MODALS CONTAINER -->
+
+  <!-- Product Modal (Add / Edit) -->
+  <div id="modal-product" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden transition-opacity">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <h3 id="modal-product-title" class="text-lg font-bold text-white flex items-center gap-2">
+          <i data-lucide="package-plus" class="w-5 h-5 text-indigo-400"></i> Ajouter un nouveau produit
+        </h3>
+        <button onclick="closeModal('modal-product')" class="text-slate-400 hover:text-white p-1 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="p-6 overflow-y-auto space-y-5 custom-scrollbar flex-1">
+        <form id="form-product" class="space-y-5">
+          <input type="hidden" id="prod-id" value="">
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="md:col-span-2">
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Nom du produit *</label>
+              <input type="text" id="prod-name" required placeholder="ex: Machine à Café Espresso Pro 15 Bar" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Référence / SKU *</label>
+              <input type="text" id="prod-sku" required placeholder="ex: REF-CAF-009" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm font-mono text-slate-100 focus:outline-none focus:border-indigo-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Catégorie *</label>
+              <select id="prod-category" required class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+                <!-- Dynamically populated -->
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Marque</label>
+              <input type="text" id="prod-brand" placeholder="ex: DeLonghi" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Statut & Visibilité</label>
+              <select id="prod-status" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+                <option value="Publié">Publié (En ligne)</option>
+                <option value="Masqué">Masqué (Caché)</option>
+                <option value="Brouillon">Brouillon</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Description complète</label>
+            <textarea id="prod-desc" rows="3" placeholder="Description détaillée du produit pour les clients..." class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500"></textarea>
+          </div>
+
+          <!-- Pricing & Inventory Section -->
+          <div class="p-4 bg-slate-950/60 border border-slate-800/80 rounded-xl space-y-4">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-2">
+              <i data-lucide="tag" class="w-4 h-4"></i> Prix & Financement (FCFA)
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Prix de Vente (FCFA) *</label>
+                <input type="number" id="prod-price" required placeholder="45000" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Prix Promo (FCFA)</label>
+                <input type="number" id="prod-promo" placeholder="39000" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Prix d'Achat Coût (FCFA)</label>
+                <input type="number" id="prod-cost" placeholder="28000" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+              </div>
+            </div>
+
+            <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-2 pt-2">
+              <i data-lucide="boxes" class="w-4 h-4"></i> Stocks & Alertes
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Quantité en stock *</label>
+                <input type="number" id="prod-stock" required placeholder="25" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Seuil d'alerte stock faible</label>
+                <input type="number" id="prod-min-stock" value="5" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+              </div>
+            </div>
+          </div>
+
+          <!-- Image Drag and Drop dropzone simulator -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Image du produit (URL ou Glisser-Déposer)</label>
+            <input type="text" id="prod-image-url" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-2 mb-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+            
+            <div id="image-dropzone" class="border-2 border-dashed border-slate-800 hover:border-indigo-500/50 bg-slate-950/40 rounded-xl p-6 text-center cursor-pointer transition-colors group">
+              <div class="w-12 h-12 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-indigo-400 group-hover:scale-110 transition-all">
+                <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+              </div>
+              <p class="mt-2 text-xs font-semibold text-slate-300">Glissez et déposez des images ici, ou cliquez pour parcourir</p>
+              <p class="text-[10px] text-slate-400 mt-1">Formats supportés: PNG, JPG, WEBP jusqu'à 5MB</p>
+            </div>
+          </div>
+
+          <!-- Variants -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Variantes (Taille, Couleur, etc. - séparées par virgules)</label>
+            <input type="text" id="prod-variants" placeholder="ex: Noir, Blanc, 64GB, 128GB" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+          </div>
+
+        </form>
+      </div>
+      <div class="px-6 py-4 border-t border-slate-800 bg-slate-900/50 flex items-center justify-end space-x-3">
+        <button type="button" onclick="closeModal('modal-product')" class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white bg-slate-800 rounded-xl transition-colors">
+          Annuler
+        </button>
+        <button type="submit" form="form-product" class="px-5 py-2 text-xs font-bold text-white bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 rounded-xl shadow-lg shadow-indigo-500/20 transition-all">
+          Enregistrer le produit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Modal -->
+  <div id="modal-category" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden transition-opacity">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <h3 id="modal-cat-title" class="text-base font-bold text-white">Ajouter une catégorie</h3>
+        <button onclick="closeModal('modal-category')" class="text-slate-400 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <form id="form-category" class="p-6 space-y-4">
+        <input type="hidden" id="cat-id" value="">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Nom de la catégorie *</label>
+          <input type="text" id="cat-name" required placeholder="ex: Électronique & High-Tech" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Description</label>
+          <textarea id="cat-desc" rows="2" placeholder="Description succincte..." class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500"></textarea>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">URL de l'image d'illustration</label>
+          <input type="text" id="cat-image" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Statut</label>
+          <select id="cat-status" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+        <div class="pt-2 flex justify-end space-x-3">
+          <button type="button" onclick="closeModal('modal-category')" class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white bg-slate-800 rounded-xl">Annuler</button>
+          <button type="submit" class="px-5 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl shadow-lg">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Detail Drawer Modal -->
+  <div id="modal-order-detail" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden transition-opacity">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      <div id="order-detail-header" class="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900">
+        <!-- Content inserted dynamically -->
+      </div>
+      <div id="order-detail-body" class="p-6 overflow-y-auto space-y-6 custom-scrollbar flex-1">
+        <!-- Details & Timeline inserted dynamically -->
+      </div>
+      <div class="px-6 py-4 border-t border-slate-800 bg-slate-900/50 flex justify-between items-center">
+        <button onclick="window.print()" class="px-3 py-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 rounded-xl flex items-center gap-1.5">
+          <i data-lucide="printer" class="w-4 h-4"></i> Imprimer la facture
+        </button>
+        <button onclick="closeModal('modal-order-detail')" class="px-5 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Profile Drawer Modal -->
+  <div id="modal-customer-detail" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden transition-opacity">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      <div id="customer-detail-header" class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <!-- Inserted dynamically -->
+      </div>
+      <div id="customer-detail-body" class="p-6 overflow-y-auto space-y-6 custom-scrollbar flex-1">
+        <!-- Inserted dynamically -->
+      </div>
+      <div class="px-6 py-4 border-t border-slate-800 bg-slate-900/50 flex justify-end">
+        <button onclick="closeModal('modal-customer-detail')" class="px-5 py-2 text-xs font-bold text-white bg-slate-800 hover:bg-slate-700 rounded-xl">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Promo Code Modal -->
+  <div id="modal-promo" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden transition-opacity">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <h3 class="text-base font-bold text-white flex items-center gap-2"><i data-lucide="ticket" class="w-5 h-5 text-indigo-400"></i> Nouveau Code Promo</h3>
+        <button onclick="closeModal('modal-promo')" class="text-slate-400 hover:text-white p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <form id="form-promo" class="p-6 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Code Promo *</label>
+          <input type="text" id="promo-code" required placeholder="ex: KORA2026" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 uppercase font-mono focus:outline-none focus:border-indigo-500">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Type de Réduction</label>
+            <select id="promo-type" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+              <option value="Pourcentage">Pourcentage (%)</option>
+              <option value="Montant Fixe">Montant Fixe (FCFA)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Valeur *</label>
+            <input type="number" id="promo-value" required placeholder="15" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Date de début</label>
+            <input type="date" id="promo-start" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Date de fin</label>
+            <input type="date" id="promo-end" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+        <div class="pt-2 flex justify-end space-x-3">
+          <button type="button" onclick="closeModal('modal-promo')" class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white bg-slate-800 rounded-xl">Annuler</button>
+          <button type="submit" class="px-5 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl shadow-lg">Créer le code</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="modal-delete-confirm" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden transition-opacity">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-sm p-6 shadow-2xl text-center space-y-4">
+      <div class="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-500 mx-auto flex items-center justify-center">
+        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h3 id="delete-modal-title" class="font-bold text-base text-white">Confirmer la suppression</h3>
+        <p id="delete-modal-desc" class="text-xs text-slate-400 mt-1">Êtes-vous sûr de vouloir supprimer cet élément ? Cette action ne peut pas être annulée.</p>
+      </div>
+      <div class="flex items-center justify-center space-x-3 pt-2">
+        <button onclick="closeModal('modal-delete-confirm')" class="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 rounded-xl w-full">Annuler</button>
+        <button id="confirm-delete-btn" class="px-4 py-2 text-xs font-bold text-white bg-rose-600 hover:bg-rose-500 rounded-xl w-full shadow-lg shadow-rose-600/20">Supprimer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <!-- Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/categories_stock.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/customers.js"></script>
+  <script src="js/promotions.js"></script>
+  <script src="js/store_content.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
